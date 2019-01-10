@@ -2,28 +2,15 @@ import { HttpParams } from '@angular/common/http';
 
 export interface ConfigurationParameters {
     /**
-     * the path that will be used to talk to the netfx api
-     * this defaults to https://api.netfx.io
-     * 
-     * it may be useful to change this to interact with different
-     * environments or different versions of the api
-     * 
-     * at the time of writing there is only one version of the api
-     * 
+     * https://api.netfx.io
      */
     basePath?: string;
     /**
-     * the path that will be used to authenticate to the netfx api
-     * this defaults to https://api.netfx.io/oauth/token
-     * 
-     * if may be useful to change this to interact with different
-     * environments
-     * 
+     * https://api.netfx.io/oauth/token
      */
     authPath?: string;
     /**
-     * this cookie prefix will be added to the name of any tokens created
-     * in the sdk check out the token service for all methods
+     * prepend value to ".token" for cookie storage of tokens. Useful for specifying different development envirionments
      */
     cookiePrefix?: string;
 }

@@ -21,9 +21,9 @@ import { Configuration } from '../configuration';
 
 
 @Injectable()
-export class UserService {
+export class NetFxUserService {
 
-    protected basePath = 'https://api.netfx.io/v1';
+    protected basePath = 'https://api.netfx.io';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

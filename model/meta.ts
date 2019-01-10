@@ -8,9 +8,9 @@
 
 
 export interface Meta {
-    page?: number;
-    pageSize?: number;
-    totalCount?: number;
-    totalPages?: number;
-    itemRange?: Array<number>;
+    Page?: number;
+    PageSize?: number;
+    TotalCount?: number;
+    TotalPages?: number;
+    ItemRange?: Array<number>;
 }

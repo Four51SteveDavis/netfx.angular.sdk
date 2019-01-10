@@ -9,13 +9,13 @@
 
 export interface User {
     ID?: string;
-    username?: string;
-    password?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    phone?: string;
-    termsAccepted?: string;
-    active?: boolean;
-    availableRoles?: Array<string>;
+    Username?: string;
+    Password?: string;
+    FirstName?: string;
+    LastName?: string;
+    Email?: string;
+    Phone?: string;
+    TermsAccepted?: string;
+    Active?: boolean;
+    AvailableRoles?: Array<string>;
 }

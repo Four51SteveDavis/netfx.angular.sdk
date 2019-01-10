@@ -19,7 +19,7 @@ This Angular SDK is made possible by leveraging [Swagger's](https://swagger.io/)
 From the npm registry:
 
 ```
-npm install --save @netfx/angular-sdk
+npm install --save @netfx/angular2-typescript-netfx
 ```
 
 ### Configuration
@@ -27,12 +27,20 @@ npm install --save @netfx/angular-sdk
 In your root app module:
 
 ```typescript
-import { NetFxModule, Configuration } from '@netfx/angular-sdk';
+import { NetFxModule, Configuration } from '@netfx/angular2-typescript-netfx';
+
+export function apiConfigFactory() {
+  return new Configuration({
+    authPath: `https:\\api.netfx.io\oauth\token`,
+    basePath: `https:\\api.netfx.io`,
+    cookiePrefix: `netfx`,
+  });
+}
 
 @NgModule({
   declarations: [...],
   imports: [
-    NetFxModule.forRoot(() => new Configuration({})),
+    NetFxModule.forRoot(apiConfigFactory),
      ...
   ],
   providers: [...]
@@ -41,51 +49,44 @@ import { NetFxModule, Configuration } from '@netfx/angular-sdk';
 export class AppModule {}
 ```
 
-### Your First API Call
-
-Now that your app is configured you can authenticate and make your
-first api call!
+### Example API call for OAuth authentication
 
 ```typescript
-import { NetFxAuthService, NetFxTokenService, UserService } from '@netfx/angular-sdk';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { ToastrService } from 'ngx-toastr';
+import { TokenRequest } from './token-request';
+import { NetFxAuthService, NetFxTokenService } from '@netfx/angular2-typescript-netfx';
 
 @Component({
-  selector: '...',
-  templateUrl: '...',
-  styleUrls: ['...']
+  selector: 'netfx-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
+export class LoginComponent implements OnInit {
+  @Input() credentials: TokenRequest = new TokenRequest();
 
-export class LoginComponent {
   constructor(
+    private toastr: ToastrService,
     private authService: NetFxAuthService,
-    private tokenService: NetFxTokenService,
-    private userService: NetFxUserService
-  ) { }
-
-  login() {
-    let username = 'myUsername';
-    let password = 'myPassword123';
-    let clientid = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX';
-    let scope = [ 'FullAccess' ];
-
-    // login as this user
-    return this.authService.Login(username, password, clientid, scope).subscribe(
-        authResponse => {
-          
-          // set the access token in the cookies, now any subsequent calls to the api
-          // will automatically have this token set in the headers
-          this.ocTokenService.SetAccess(authResponse.access_token);
-
-          // make call to get that user's details
-          this.userService.Get().subscribe(
-            currentUser => {
-
-              // because we set that user's token a userService.Get will return details for that user
-              console.log(currentUser)
-            }
-          )
-        }
-      );
+    private tokenService: NetFxTokenService
+  ) {
+    this.credentials.username = 'example_username';
+    this.credentials.password = 'XXXX';
+    this.credentials.client_id = 'XXXX';
+    this.credentials.grant_type = 'password';
+    this.credentials.scope = ['FullAccess'];
   }
+
+  ngOnInit() {
+  }
+
+  login(): void {
+    this.authService.Get(this.credentials).subscribe(response => {
+        this.tokenService.Set(response.access_token);
+        this.toastr.success('Success', 'Login Attempt');
+    });
+  }
+
 }
 ```

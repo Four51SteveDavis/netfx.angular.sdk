@@ -1,22 +1,33 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
+import { HttpClient } from '@angular/common/http';
+
+
+import { NetFxUserService } from './api/user.service';
 
 @NgModule({
-  imports:      [ CommonModule, HttpClientModule ]
+  imports:      [],
+  declarations: [],
+  exports:      [],
+  providers: [
+    NetFxUserService ]
 })
 export class NetFxModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
             ngModule: NetFxModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]
-        }
+        };
     }
 
-    constructor( @Optional() @SkipSelf() parentModule: NetFxModule) {
+    constructor( @Optional() @SkipSelf() parentModule: NetFxModule,
+	  @Optional() http: HttpClient) {
         if (parentModule) {
             throw new Error('NetFxModule is already loaded. Import your base AppModule only.');
+        }
+		if (!http) {
+            throw new Error('You need to import the HttpClientModule in your AppModule! \n' +
+            'See also https://github.com/angular/angular/issues/20575');
         }
     }
 }
