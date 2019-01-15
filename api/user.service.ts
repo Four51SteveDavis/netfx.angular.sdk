@@ -100,13 +100,13 @@ export class NetFxUserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public post(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public post(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public post(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public post(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public put(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public put(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public put(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public put(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (user === null || user === undefined) {
-            throw new Error('Required parameter user was null or undefined when calling post.');
+            throw new Error('Required parameter user was null or undefined when calling put.');
         }
 
         let headers = this.defaultHeaders;
@@ -133,7 +133,7 @@ export class NetFxUserService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<User>(`${this.basePath}user`,
+        return this.httpClient.put<User>(`${this.basePath}user`,
             user,
             {
                 headers: headers,

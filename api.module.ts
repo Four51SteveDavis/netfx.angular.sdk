@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { NetFxAdminUserService } from './api/adminUser.service';
 import { NetFxUserService } from './api/user.service';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { NetFxUserService } from './api/user.service';
   declarations: [],
   exports:      [],
   providers: [
+    NetFxAdminUserService,
     NetFxUserService ]
 })
 export class NetFxModule {
