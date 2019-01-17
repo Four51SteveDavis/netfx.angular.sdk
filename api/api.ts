@@ -1,9 +1,11 @@
 export * from './adminUser.service';
 import { NetFxAdminUserService } from './adminUser.service';
+export * from './customer.service';
+import { NetFxCustomerService } from './customer.service';
 export * from './user.service';
 import { NetFxUserService } from './user.service';
 export * from './auth.service';
 import { NetFxAuthService } from './auth.service';
 export * from './token.service';
 import { NetFxTokenService } from './token.service';
-export const APIS = [NetFxAdminUserService, NetFxUserService, NetFxAuthService, NetFxTokenService];
+export const APIS = [NetFxAdminUserService, NetFxCustomerService, NetFxUserService, NetFxAuthService, NetFxTokenService];
