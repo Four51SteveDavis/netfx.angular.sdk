@@ -12,12 +12,12 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@a
 import { CustomHttpUrlEncodingCodec } from '../encoder';
 
 import { Observable } from 'rxjs';
-import { NetFxTokenService } from './token.service';
 
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
+import { NetFxTokenService } from './token.service';
 
 
 @Injectable()
@@ -59,10 +59,17 @@ export class NetFxUserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public get(observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public get(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public get(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public get(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public Get(options?: { observe?: 'body', reportProgress?: boolean}): Observable<User>;
+    public Get(options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<User>>;
+    public Get(options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<User>>;
+    public Get(options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
 
         let headers = this.defaultHeaders;
 
@@ -87,8 +94,8 @@ export class NetFxUserService {
         return this.httpClient.get<User>(`${this.basePath}user`,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
@@ -100,11 +107,17 @@ export class NetFxUserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public put(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public put(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public put(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public put(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public Put(user: User, options?: { observe?: 'body', reportProgress?: boolean}): Observable<User>;
+    public Put(user: User, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<User>>;
+    public Put(user: User, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<User>>;
+    public Put(user: User, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
         if (user === null || user === undefined) {
             throw new Error('Required parameter user was null or undefined when calling put.');
         }
@@ -137,10 +150,10 @@ export class NetFxUserService {
             user,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
 
-}
+} 

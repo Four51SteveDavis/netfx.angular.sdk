@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { NetFxAdminUserService } from './api/adminUser.service';
+import { NetFxBillingAddressService } from './api/billingAddress.service';
 import { NetFxCustomerService } from './api/customer.service';
+import { NetFxShippingAddressService } from './api/shippingAddress.service';
 import { NetFxUserService } from './api/user.service';
 
 @NgModule({
@@ -13,7 +15,9 @@ import { NetFxUserService } from './api/user.service';
   exports:      [],
   providers: [
     NetFxAdminUserService,
+    NetFxBillingAddressService,
     NetFxCustomerService,
+    NetFxShippingAddressService,
     NetFxUserService ]
 })
 export class NetFxModule {

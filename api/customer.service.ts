@@ -12,13 +12,13 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@a
 import { CustomHttpUrlEncodingCodec } from '../encoder';
 
 import { Observable } from 'rxjs';
-import { NetFxTokenService } from './token.service';
 
 import { Customer } from '../model/customer';
 import { ListCustomer } from '../model/listCustomer';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
+import { NetFxTokenService } from './token.service';
 
 
 @Injectable()
@@ -61,11 +61,17 @@ export class NetFxCustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public _delete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public _delete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public _delete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public _delete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public Delete(id: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public Delete(id: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public Delete(id: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public Delete(id: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling _delete.');
         }
@@ -93,8 +99,8 @@ export class NetFxCustomerService {
         return this.httpClient.delete<any>(`${this.basePath}customers/${encodeURIComponent(String(id))}`,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
@@ -106,11 +112,17 @@ export class NetFxCustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public get(id: string, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
-    public get(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
-    public get(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
-    public get(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public Get(id: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Customer>;
+    public Get(id: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Customer>>;
+    public Get(id: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Customer>>;
+    public Get(id: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling get.');
         }
@@ -138,8 +150,8 @@ export class NetFxCustomerService {
         return this.httpClient.get<Customer>(`${this.basePath}customers/${encodeURIComponent(String(id))}`,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
@@ -156,36 +168,55 @@ export class NetFxCustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public list(search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string; }, observe?: 'body', reportProgress?: boolean): Observable<ListCustomer>;
-    public list(search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string; }, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ListCustomer>>;
-    public list(search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string; }, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ListCustomer>>;
-    public list(search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string; }, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-
-
-
-
+    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListCustomer>;
+    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListCustomer>>;
+    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListCustomer>>;
+    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (search !== undefined && search !== null) {
-            queryParameters = queryParameters.set('search', <any>search);
+        if (opts.search !== undefined && opts.search !== null) {
+            queryParameters = queryParameters.set('search', <any>opts.search);
         }
-        if (searchOn !== undefined && searchOn !== null) {
-            queryParameters = queryParameters.set('searchOn', <any>searchOn);
+		if (opts.search === null) {
+            throw new Error('Parameter search was null when calling List. Null values are not allowed');
+        }														
+        if (opts.searchOn !== undefined && opts.searchOn !== null) {
+            queryParameters = queryParameters.set('searchOn', <any>opts.searchOn);
         }
-        if (sortBy !== undefined && sortBy !== null) {
-            queryParameters = queryParameters.set('sortBy', <any>sortBy);
+		if (opts.searchOn === null) {
+            throw new Error('Parameter searchOn was null when calling List. Null values are not allowed');
+        }														
+        if (opts.sortBy !== undefined && opts.sortBy !== null) {
+            queryParameters = queryParameters.set('sortBy', <any>opts.sortBy);
         }
-        if (page !== undefined && page !== null) {
-            queryParameters = queryParameters.set('page', <any>page);
+		if (opts.sortBy === null) {
+            throw new Error('Parameter sortBy was null when calling List. Null values are not allowed');
+        }														
+        if (opts.page !== undefined && opts.page !== null) {
+            queryParameters = queryParameters.set('page', <any>opts.page);
         }
-        if (pageSize !== undefined && pageSize !== null) {
-            queryParameters = queryParameters.set('pageSize', <any>pageSize);
+		if (opts.page === null) {
+            throw new Error('Parameter page was null when calling List. Null values are not allowed');
+        }														
+        if (opts.pageSize !== undefined && opts.pageSize !== null) {
+            queryParameters = queryParameters.set('pageSize', <any>opts.pageSize);
         }
-        if (filters !== undefined && filters !== null) {
-            queryParameters = queryParameters.set('filters', <any>filters);
+		if (opts.pageSize === null) {
+            throw new Error('Parameter pageSize was null when calling List. Null values are not allowed');
+        }														
+        if (opts.filters !== undefined && opts.filters !== null) {
+            queryParameters = this.configuration.unwrapFilters(opts.filters, queryParameters, 'List');
         }
+		if (opts.filters === null) {
+            throw new Error('Parameter filters was null when calling List. Null values are not allowed');
+        }														
 
         let headers = this.defaultHeaders;
 
@@ -211,8 +242,8 @@ export class NetFxCustomerService {
             {
                 params: queryParameters,
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
@@ -224,11 +255,17 @@ export class NetFxCustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public post(customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
-    public post(customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
-    public post(customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
-    public post(customer: Customer, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public Post(customer: Customer, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Customer>;
+    public Post(customer: Customer, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Customer>>;
+    public Post(customer: Customer, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Customer>>;
+    public Post(customer: Customer, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
         if (customer === null || customer === undefined) {
             throw new Error('Required parameter customer was null or undefined when calling post.');
         }
@@ -261,8 +298,8 @@ export class NetFxCustomerService {
             customer,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
@@ -275,15 +312,20 @@ export class NetFxCustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public put(id: string, customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
-    public put(id: string, customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
-    public put(id: string, customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
-    public put(id: string, customer: Customer, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public Put(id: string, customer: Customer, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Customer>;
+    public Put(id: string, customer: Customer, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Customer>>;
+    public Put(id: string, customer: Customer, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Customer>>;
+    public Put(id: string, customer: Customer, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling put.');
         }
-
         if (customer === null || customer === undefined) {
             throw new Error('Required parameter customer was null or undefined when calling put.');
         }
@@ -316,10 +358,10 @@ export class NetFxCustomerService {
             customer,
             {
                 headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
             }
         );
     }
 
-}
+} 

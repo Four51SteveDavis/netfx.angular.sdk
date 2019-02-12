@@ -5,13 +5,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Settings } from './settings';
+import { Address } from './address';
+import { Meta } from './meta';
 
 
-export interface Customer {
-    ID?: string;
-    Name?: string;
-    DefaultCatalogID?: string;
-    Active?: boolean;
-    Settings?: Settings;
+export interface ListAddress {
+    Items?: Array<Address>;
+    Meta?: Meta;
 }

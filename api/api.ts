@@ -1,11 +1,15 @@
 export * from './adminUser.service';
 import { NetFxAdminUserService } from './adminUser.service';
+export * from './billingAddress.service';
+import { NetFxBillingAddressService } from './billingAddress.service';
 export * from './customer.service';
 import { NetFxCustomerService } from './customer.service';
+export * from './shippingAddress.service';
+import { NetFxShippingAddressService } from './shippingAddress.service';
 export * from './user.service';
 import { NetFxUserService } from './user.service';
 export * from './auth.service';
 import { NetFxAuthService } from './auth.service';
 export * from './token.service';
 import { NetFxTokenService } from './token.service';
-export const APIS = [NetFxAdminUserService, NetFxCustomerService, NetFxUserService, NetFxAuthService, NetFxTokenService];
+export const APIS = [NetFxAdminUserService, NetFxBillingAddressService, NetFxCustomerService, NetFxShippingAddressService, NetFxUserService, NetFxAuthService, NetFxTokenService];

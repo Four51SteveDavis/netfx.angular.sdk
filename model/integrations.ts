@@ -5,13 +5,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Settings } from './settings';
+import { StorefrontConfig } from './storefrontConfig';
+import { ZohoConfig } from './zohoConfig';
 
 
-export interface Customer {
-    ID?: string;
-    Name?: string;
-    DefaultCatalogID?: string;
-    Active?: boolean;
-    Settings?: Settings;
+export interface Integrations {
+    Zoho?: ZohoConfig;
+    Storefront?: StorefrontConfig;
 }
