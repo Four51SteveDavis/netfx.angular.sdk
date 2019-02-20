@@ -13,8 +13,8 @@ import { CustomHttpUrlEncodingCodec } from '../encoder';
 
 import { Observable } from 'rxjs';
 
-import { Address } from '../model/address';
-import { ListAddress } from '../model/listAddress';
+import { ListShipmentDestinationAddress } from '../model/listShipmentDestinationAddress';
+import { ShipmentDestinationAddress } from '../model/shipmentDestinationAddress';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
@@ -22,7 +22,7 @@ import { NetFxTokenService } from './token.service';
 
 
 @Injectable()
-export class NetFxBillingAddressService {
+export class NetFxShipmentDestinationAddressService {
 
     protected basePath = 'https://api.netfx.io';
     public defaultHeaders = new HttpHeaders();
@@ -57,8 +57,8 @@ export class NetFxBillingAddressService {
     /**
      * 
      * 
-     * @param customerId Customer id of the billing address.
-     * @param addressId Address id of the billing address.
+     * @param customerId Customer id of the shipment destination address.
+     * @param addressId Address id of the shipment destination address.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -100,7 +100,7 @@ export class NetFxBillingAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}${encodeURIComponent(String(customerId))}/addresses/billing/${encodeURIComponent(String(addressId))}`,
+        return this.httpClient.delete<any>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/destination/${encodeURIComponent(String(addressId))}`,
             {
                 headers: headers,
                 observe: opts.observe,
@@ -112,14 +112,14 @@ export class NetFxBillingAddressService {
     /**
      * 
      * 
-     * @param customerId Customer id of the address.
-     * @param addressId Address id of the address.
+     * @param customerId Customer id of the shipment destination address.
+     * @param addressId Address id of the shipment destination address.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public Get(customerId: string, addressId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Address>;
-    public Get(customerId: string, addressId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Address>>;
-    public Get(customerId: string, addressId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Address>>;
+    public Get(customerId: string, addressId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<ShipmentDestinationAddress>;
+    public Get(customerId: string, addressId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ShipmentDestinationAddress>>;
+    public Get(customerId: string, addressId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ShipmentDestinationAddress>>;
     public Get(customerId: string, addressId: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
@@ -155,7 +155,7 @@ export class NetFxBillingAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.get<Address>(`${this.basePath}${encodeURIComponent(String(customerId))}/addresses/billing/${encodeURIComponent(String(addressId))}`,
+        return this.httpClient.get<ShipmentDestinationAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/destination/${encodeURIComponent(String(addressId))}`,
             {
                 headers: headers,
                 observe: opts.observe,
@@ -167,7 +167,7 @@ export class NetFxBillingAddressService {
     /**
      * 
      * 
-     * @param customerId Customer id of the address.
+     * @param customerId Customer id of the shipment destination address.
      * @param search Word or phrase to search for.
      * @param searchOn Comma-delimited list of fields to search on.
      * @param sortBy Comma-delimited list of fields to sort by.
@@ -177,9 +177,9 @@ export class NetFxBillingAddressService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListAddress>;
-    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListAddress>>;
-    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListAddress>>;
+    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListShipmentDestinationAddress>;
+    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListShipmentDestinationAddress>>;
+    public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListShipmentDestinationAddress>>;
     public List(customerId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
@@ -250,7 +250,7 @@ export class NetFxBillingAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.get<ListAddress>(`${this.basePath}${encodeURIComponent(String(customerId))}/addresses/billing`,
+        return this.httpClient.get<ListShipmentDestinationAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/destination`,
             {
                 params: queryParameters,
                 headers: headers,
@@ -263,15 +263,15 @@ export class NetFxBillingAddressService {
     /**
      * 
      * 
-     * @param customerId Customer id of the address.
-     * @param address 
+     * @param customerId Customer id of the shipment destination address.
+     * @param shipmentDestinationAddress 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public Post(customerId: string, address: Address, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Address>;
-    public Post(customerId: string, address: Address, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Address>>;
-    public Post(customerId: string, address: Address, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Address>>;
-    public Post(customerId: string, address: Address, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+    public Post(customerId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'body', reportProgress?: boolean}): Observable<ShipmentDestinationAddress>;
+    public Post(customerId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ShipmentDestinationAddress>>;
+    public Post(customerId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ShipmentDestinationAddress>>;
+    public Post(customerId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
             opts.observe = 'body';
@@ -282,8 +282,8 @@ export class NetFxBillingAddressService {
         if (customerId === null || customerId === undefined) {
             throw new Error('Required parameter customerId was null or undefined when calling post.');
         }
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling post.');
+        if (shipmentDestinationAddress === null || shipmentDestinationAddress === undefined) {
+            throw new Error('Required parameter shipmentDestinationAddress was null or undefined when calling post.');
         }
 
         let headers = this.defaultHeaders;
@@ -310,8 +310,8 @@ export class NetFxBillingAddressService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<Address>(`${this.basePath}${encodeURIComponent(String(customerId))}/addresses/billing`,
-            address,
+        return this.httpClient.post<ShipmentDestinationAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/destination`,
+            shipmentDestinationAddress,
             {
                 headers: headers,
                 observe: opts.observe,
@@ -323,16 +323,16 @@ export class NetFxBillingAddressService {
     /**
      * 
      * 
-     * @param customerId Customer id of the address.
-     * @param addressId Address id of the address.
-     * @param address 
+     * @param customerId Customer id of the shipment destination address.
+     * @param addressId Address id of the shipment destination address.
+     * @param shipmentDestinationAddress 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public Put(customerId: string, addressId: string, address: Address, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Address>;
-    public Put(customerId: string, addressId: string, address: Address, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Address>>;
-    public Put(customerId: string, addressId: string, address: Address, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Address>>;
-    public Put(customerId: string, addressId: string, address: Address, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+    public Put(customerId: string, addressId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'body', reportProgress?: boolean}): Observable<ShipmentDestinationAddress>;
+    public Put(customerId: string, addressId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ShipmentDestinationAddress>>;
+    public Put(customerId: string, addressId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ShipmentDestinationAddress>>;
+    public Put(customerId: string, addressId: string, shipmentDestinationAddress: ShipmentDestinationAddress, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
             opts.observe = 'body';
@@ -346,8 +346,8 @@ export class NetFxBillingAddressService {
         if (addressId === null || addressId === undefined) {
             throw new Error('Required parameter addressId was null or undefined when calling put.');
         }
-        if (address === null || address === undefined) {
-            throw new Error('Required parameter address was null or undefined when calling put.');
+        if (shipmentDestinationAddress === null || shipmentDestinationAddress === undefined) {
+            throw new Error('Required parameter shipmentDestinationAddress was null or undefined when calling put.');
         }
 
         let headers = this.defaultHeaders;
@@ -374,8 +374,8 @@ export class NetFxBillingAddressService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<Address>(`${this.basePath}${encodeURIComponent(String(customerId))}/addresses/billing/${encodeURIComponent(String(addressId))}`,
-            address,
+        return this.httpClient.put<ShipmentDestinationAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/destination/${encodeURIComponent(String(addressId))}`,
+            shipmentDestinationAddress,
             {
                 headers: headers,
                 observe: opts.observe,

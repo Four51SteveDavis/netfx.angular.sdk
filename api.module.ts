@@ -6,6 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { NetFxAdminUserService } from './api/adminUser.service';
 import { NetFxBillingAddressService } from './api/billingAddress.service';
 import { NetFxCustomerService } from './api/customer.service';
+import { NetFxCustomerUserService } from './api/customerUser.service';
+import { NetFxShipmentService } from './api/shipment.service';
+import { NetFxShipmentDestinationAddressService } from './api/shipmentDestinationAddress.service';
+import { NetFxShipmentItemService } from './api/shipmentItem.service';
+import { NetFxShipmentOriginAddressService } from './api/shipmentOriginAddress.service';
+import { NetFxShipmentRateService } from './api/shipmentRate.service';
 import { NetFxShippingAddressService } from './api/shippingAddress.service';
 import { NetFxUserService } from './api/user.service';
 
@@ -17,6 +23,12 @@ import { NetFxUserService } from './api/user.service';
     NetFxAdminUserService,
     NetFxBillingAddressService,
     NetFxCustomerService,
+    NetFxCustomerUserService,
+    NetFxShipmentService,
+    NetFxShipmentDestinationAddressService,
+    NetFxShipmentItemService,
+    NetFxShipmentOriginAddressService,
+    NetFxShipmentRateService,
     NetFxShippingAddressService,
     NetFxUserService ]
 })
