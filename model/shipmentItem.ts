@@ -8,6 +8,7 @@
 
 
 export interface ShipmentItem {
+    id?: string;
     ItemId?: number;
     Description?: string;
     NmfcClass?: string;

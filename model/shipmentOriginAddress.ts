@@ -9,6 +9,7 @@
 
 export interface ShipmentOriginAddress {
     Accessorial?: Array<string>;
+    id?: string;
     LocationType?: string;
     LocationName?: string;
     AddressLine1?: string;

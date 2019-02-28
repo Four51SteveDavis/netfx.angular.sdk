@@ -5,6 +5,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Customer } from './customer';
 
 
 export interface User {
@@ -18,4 +19,5 @@ export interface User {
     TermsAccepted?: string;
     Active?: boolean;
     AvailableRoles?: Array<string>;
+    Customer?: Customer;
 }

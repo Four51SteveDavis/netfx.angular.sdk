@@ -215,7 +215,8 @@ export class NetFxShipmentRateService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.get<ListShipmentRateQuote>(`${this.basePath}shipment/rate/${encodeURIComponent(String(customerId))}/quote`,
+        return this.httpClient.post<ListShipmentRateQuote>(`${this.basePath}shipment/rate/${encodeURIComponent(String(customerId))}/quote`,
+            shipmentRate,
             {
                 headers: headers,
                 observe: opts.observe,

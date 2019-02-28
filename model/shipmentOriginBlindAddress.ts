@@ -8,6 +8,7 @@
 
 
 export interface ShipmentOriginBlindAddress {
+    id?: string;
     LocationType?: string;
     LocationName?: string;
     AddressLine1?: string;
