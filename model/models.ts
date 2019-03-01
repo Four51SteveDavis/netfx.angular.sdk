@@ -10,6 +10,7 @@ export * from './listShipment';
 export * from './listShipmentDestinationAddress';
 export * from './listShipmentItem';
 export * from './listShipmentOriginAddress';
+export * from './listShipmentOriginBlindAddress';
 export * from './listShipmentRate';
 export * from './listShipmentRateQuote';
 export * from './listUser';

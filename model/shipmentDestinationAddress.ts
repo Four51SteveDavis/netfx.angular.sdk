@@ -10,6 +10,8 @@
 export interface ShipmentDestinationAddress {
     Accessorial?: Array<string>;
     id?: string;
+    IsDefault?: boolean;
+    IsFavorite?: boolean;
     LocationType?: string;
     LocationName?: string;
     AddressLine1?: string;

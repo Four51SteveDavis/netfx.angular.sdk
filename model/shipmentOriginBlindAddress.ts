@@ -9,6 +9,8 @@
 
 export interface ShipmentOriginBlindAddress {
     id?: string;
+    IsDefault?: boolean;
+    IsFavorite?: boolean;
     LocationType?: string;
     LocationName?: string;
     AddressLine1?: string;
