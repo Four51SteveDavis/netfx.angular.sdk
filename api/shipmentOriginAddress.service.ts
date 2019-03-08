@@ -100,7 +100,7 @@ export class NetFxShipmentOriginAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/Origin/${encodeURIComponent(String(addressId))}`,
+        return this.httpClient.delete<any>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/origin/${encodeURIComponent(String(addressId))}`,
             {
                 headers: headers,
                 observe: opts.observe,
@@ -155,7 +155,7 @@ export class NetFxShipmentOriginAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.get<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/Origin/${encodeURIComponent(String(addressId))}`,
+        return this.httpClient.get<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/origin/${encodeURIComponent(String(addressId))}`,
             {
                 headers: headers,
                 observe: opts.observe,
@@ -250,7 +250,7 @@ export class NetFxShipmentOriginAddressService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.get<ListShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/Origin`,
+        return this.httpClient.get<ListShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/origin`,
             {
                 params: queryParameters,
                 headers: headers,
@@ -310,7 +310,7 @@ export class NetFxShipmentOriginAddressService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/Origin`,
+        return this.httpClient.post<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/origin`,
             shipmentOriginAddress,
             {
                 headers: headers,
@@ -374,7 +374,7 @@ export class NetFxShipmentOriginAddressService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/Origin/${encodeURIComponent(String(addressId))}`,
+        return this.httpClient.put<ShipmentOriginAddress>(`${this.basePath}shipment/addresses/${encodeURIComponent(String(customerId))}/origin/${encodeURIComponent(String(addressId))}`,
             shipmentOriginAddress,
             {
                 headers: headers,

@@ -10,11 +10,18 @@ import { ShipmentItem } from './shipmentItem';
 import { ShipmentOriginAddress } from './shipmentOriginAddress';
 import { ShipmentOriginBlindAddress } from './shipmentOriginBlindAddress';
 import { ShipmentRateQuote } from './shipmentRateQuote';
+import { ShipmentStatus } from './shipmentStatus';
+import { ShipmentTracking } from './shipmentTracking';
 
 
 export interface Shipment {
+    id?: string;
+    timeStamp?: Date;
+    customerId?: string;
     ShipmentId?: number;
     ShipmentMode?: string;
+    Status?: ShipmentStatus;
+    Tracking?: ShipmentTracking;
     Origin?: ShipmentOriginAddress;
     Destination?: ShipmentDestinationAddress;
     BlindOrigin?: ShipmentOriginBlindAddress;

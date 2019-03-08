@@ -9,7 +9,11 @@
 
 export interface ShipmentOriginAddress {
     Accessorial?: Array<string>;
+    BolNumber?: string;
+    ReferenceNumber?: string;
     id?: string;
+    timeStamp?: Date;
+    customerId?: string;
     IsDefault?: boolean;
     IsFavorite?: boolean;
     LocationType?: string;
@@ -22,7 +26,5 @@ export interface ShipmentOriginAddress {
     CountryCode?: string;
     ContactName?: string;
     ContactPhone?: string;
-    BolNumber?: string;
     PickupDeliveryNumber?: string;
-    ReferenceNumber?: string;
 }

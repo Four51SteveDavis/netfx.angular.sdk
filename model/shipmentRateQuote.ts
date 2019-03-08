@@ -10,6 +10,8 @@ import { ShipmentOriginAddress } from './shipmentOriginAddress';
 
 
 export interface ShipmentRateQuote {
+    id?: string;
+    customerId?: string;
     CarrierName?: string;
     CarrierSCAC?: string;
     CarrierGuarantee?: string;

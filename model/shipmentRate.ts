@@ -11,6 +11,9 @@ import { ShipmentOriginAddress } from './shipmentOriginAddress';
 
 
 export interface ShipmentRate {
+    id?: string;
+    timeStamp?: Date;
+    customerId?: string;
     Origin?: ShipmentOriginAddress;
     Destination?: ShipmentDestinationAddress;
     PickupAppointmentDate?: string;

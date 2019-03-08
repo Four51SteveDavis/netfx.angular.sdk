@@ -7,14 +7,11 @@
  */
 
 
-export interface ShipmentOriginBlindAddress {
-    id?: string;
-    timeStamp?: Date;
-    customerId?: string;
-    IsDefault?: boolean;
-    IsFavorite?: boolean;
+export interface Stop {
     LocationType?: string;
     LocationName?: string;
+    AppointmentStart?: string;
+    AppointmentEnd?: string;
     AddressLine1?: string;
     AddressLine2?: string;
     City?: string;
@@ -23,5 +20,9 @@ export interface ShipmentOriginBlindAddress {
     CountryCode?: string;
     ContactName?: string;
     ContactPhone?: string;
-    PickupDeliveryNumber?: string;
+    BolNumber?: string;
+    ReferenceNumber?: string;
+    StopType?: string;
+    StopNumber?: number;
+    Accessorials?: Array<string>;
 }

@@ -7,11 +7,7 @@
  */
 
 
-export interface ShipmentItem {
-    id?: string;
-    timeStamp?: Date;
-    customerId?: string;
-    IsFavorite?: boolean;
+export interface Item {
     ItemId?: number;
     Description?: string;
     NmfcClass?: string;
@@ -22,4 +18,6 @@ export interface ShipmentItem {
     HandlingUnitType?: string;
     HandlingUnitQuantity?: number;
     HazardousMaterial?: boolean;
+    StopPickNumber?: number;
+    StopDropNumber?: number;
 }
