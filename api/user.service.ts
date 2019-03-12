@@ -156,4 +156,139 @@ export class NetFxUserService {
         );
     }
 
+    /**
+     * 
+     * 
+     * @param email Email of the user.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ResetPassword(email: string, options?: { email?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public ResetPassword(email: string, options?: { email?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public ResetPassword(email: string, options?: { email?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public ResetPassword(email: string, options?: { email?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling resetPassword.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (email !== undefined && email !== null) {
+            queryParameters = queryParameters.set('email', <any>email);
+        }
+		if (email === null) {
+            throw new Error('Parameter email was null when calling ResetPassword. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}user/reset`,
+            {
+                params: queryParameters,
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param code Code of the user.
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ResetPasswordWithCode(code: string, username: string, password: string, options?: { username?: string, password?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public ResetPasswordWithCode(code: string, username: string, password: string, options?: { username?: string, password?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public ResetPasswordWithCode(code: string, username: string, password: string, options?: { username?: string, password?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public ResetPasswordWithCode(code: string, username: string, password: string, options?: { username?: string, password?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (code === null || code === undefined) {
+            throw new Error('Required parameter code was null or undefined when calling resetPasswordWithCode.');
+        }
+        if (username === null || username === undefined) {
+            throw new Error('Required parameter username was null or undefined when calling resetPasswordWithCode.');
+        }
+        if (password === null || password === undefined) {
+            throw new Error('Required parameter password was null or undefined when calling resetPasswordWithCode.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (username !== undefined && username !== null) {
+            queryParameters = queryParameters.set('username', <any>username);
+        }
+		if (username === null) {
+            throw new Error('Parameter username was null when calling ResetPasswordWithCode. Null values are not allowed');
+        }														
+        if (password !== undefined && password !== null) {
+            queryParameters = queryParameters.set('password', <any>password);
+        }
+		if (password === null) {
+            throw new Error('Parameter password was null when calling ResetPasswordWithCode. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.put<any>(`${this.basePath}user/reset/${encodeURIComponent(String(code))}`,
+            null,
+            {
+                params: queryParameters,
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
 } 

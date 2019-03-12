@@ -12,4 +12,5 @@ export interface Document {
     Href?: string;
     Type?: string;
     Description?: string;
+    Jpeg?: any;
 }

@@ -223,61 +223,6 @@ export class NetFxShipmentService {
     /**
      * 
      * 
-     * @param customerId Customer id of the object.
-     * @param shipmentId Shipment id of the object.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public GetShipmentDoc(customerId: string, shipmentId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<any>;
-    public GetShipmentDoc(customerId: string, shipmentId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
-    public GetShipmentDoc(customerId: string, shipmentId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
-    public GetShipmentDoc(customerId: string, shipmentId: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
-		const opts = options || {};
-        if (opts.observe === null || opts.observe === undefined) {
-            opts.observe = 'body';
-        }
-        if (opts.reportProgress === null || opts.reportProgress === undefined) {
-            opts.reportProgress = false;
-        }
-        if (customerId === null || customerId === undefined) {
-            throw new Error('Required parameter customerId was null or undefined when calling getShipmentDoc.');
-        }
-        if (shipmentId === null || shipmentId === undefined) {
-            throw new Error('Required parameter shipmentId was null or undefined when calling getShipmentDoc.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (oauth2) required
-        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
-
-        // to determine the Accept header
-        const httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json',
-            'text/plain; charset=utf-8'
-        ];
-
-        return this.httpClient.get<any>(`${this.basePath}shipment/${encodeURIComponent(String(customerId))}/${encodeURIComponent(String(shipmentId))}/document`,
-            {
-                headers: headers,
-                observe: opts.observe,
-                reportProgress: opts.reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
      * @param customerId Customer id of the shipment.
      * @param search Word or phrase to search for.
      * @param searchOn Comma-delimited list of fields to search on.
