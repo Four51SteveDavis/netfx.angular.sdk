@@ -475,4 +475,69 @@ export class NetFxCustomerUserService {
         );
     }
 
+    /**
+     * 
+     * 
+     * @param customerId Customer id of the customer users.
+     * @param userId User id of the customer users.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public SendRegistration(customerId: string, userId: string, options?: { userId?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public SendRegistration(customerId: string, userId: string, options?: { userId?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public SendRegistration(customerId: string, userId: string, options?: { userId?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public SendRegistration(customerId: string, userId: string, options?: { userId?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (customerId === null || customerId === undefined) {
+            throw new Error('Required parameter customerId was null or undefined when calling sendRegistration.');
+        }
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling sendRegistration.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (userId !== undefined && userId !== null) {
+            queryParameters = queryParameters.set('userId', <any>userId);
+        }
+		if (userId === null) {
+            throw new Error('Parameter userId was null when calling SendRegistration. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.put<any>(`${this.basePath}${encodeURIComponent(String(customerId))}/customerusers/registration`,
+            null,
+            {
+                params: queryParameters,
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
 } 

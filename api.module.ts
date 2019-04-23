@@ -7,6 +7,8 @@ import { NetFxAdminUserService } from './api/adminUser.service';
 import { NetFxBillingAddressService } from './api/billingAddress.service';
 import { NetFxCustomerService } from './api/customer.service';
 import { NetFxCustomerUserService } from './api/customerUser.service';
+import { NetFxPriceScheduleService } from './api/priceSchedule.service';
+import { NetFxProductService } from './api/product.service';
 import { NetFxShipmentService } from './api/shipment.service';
 import { NetFxShipmentBlindAddressService } from './api/shipmentBlindAddress.service';
 import { NetFxShipmentDestinationAddressService } from './api/shipmentDestinationAddress.service';
@@ -14,6 +16,11 @@ import { NetFxShipmentItemService } from './api/shipmentItem.service';
 import { NetFxShipmentOriginAddressService } from './api/shipmentOriginAddress.service';
 import { NetFxShipmentRateService } from './api/shipmentRate.service';
 import { NetFxShippingAddressService } from './api/shippingAddress.service';
+import { NetFxSpecService } from './api/spec.service';
+import { NetFxSpecOptionService } from './api/specOption.service';
+import { NetFxSupplierService } from './api/supplier.service';
+import { NetFxSupplierProductService } from './api/supplierProduct.service';
+import { NetFxSupplierSpecService } from './api/supplierSpec.service';
 import { NetFxUserService } from './api/user.service';
 
 @NgModule({
@@ -25,6 +32,8 @@ import { NetFxUserService } from './api/user.service';
     NetFxBillingAddressService,
     NetFxCustomerService,
     NetFxCustomerUserService,
+    NetFxPriceScheduleService,
+    NetFxProductService,
     NetFxShipmentService,
     NetFxShipmentBlindAddressService,
     NetFxShipmentDestinationAddressService,
@@ -32,6 +41,11 @@ import { NetFxUserService } from './api/user.service';
     NetFxShipmentOriginAddressService,
     NetFxShipmentRateService,
     NetFxShippingAddressService,
+    NetFxSpecService,
+    NetFxSpecOptionService,
+    NetFxSupplierService,
+    NetFxSupplierProductService,
+    NetFxSupplierSpecService,
     NetFxUserService ]
 })
 export class NetFxModule {
