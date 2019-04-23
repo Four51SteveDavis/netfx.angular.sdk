@@ -14,6 +14,7 @@ import { CustomHttpUrlEncodingCodec } from '../encoder';
 import { Observable } from 'rxjs';
 
 import { ListSpec } from '../model/listSpec';
+import { ListSpecProductAssignment } from '../model/listSpecProductAssignment';
 import { Spec } from '../model/spec';
 import { SpecProductAssignment } from '../model/specProductAssignment';
 
@@ -361,9 +362,9 @@ export class NetFxSpecService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<any>;
-    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
-    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListSpecProductAssignment>;
+    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListSpecProductAssignment>>;
+    public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListSpecProductAssignment>>;
     public ListProductAssignment(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
@@ -431,7 +432,7 @@ export class NetFxSpecService {
             'text/plain; charset=utf-8'
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}specs/productassignments`,
+        return this.httpClient.get<ListSpecProductAssignment>(`${this.basePath}specs/productassignments`,
             {
                 params: queryParameters,
                 headers: headers,

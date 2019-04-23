@@ -14,7 +14,9 @@ import { CustomHttpUrlEncodingCodec } from '../encoder';
 import { Observable } from 'rxjs';
 
 import { ListProduct } from '../model/listProduct';
+import { ListProductAssignment } from '../model/listProductAssignment';
 import { Product } from '../model/product';
+import { ProductAssignment } from '../model/productAssignment';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
@@ -98,6 +100,84 @@ export class NetFxProductService {
 
         return this.httpClient.delete<any>(`${this.basePath}products/${encodeURIComponent(String(productId))}`,
             {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productId Product id of the product.
+     * @param buyerID ID of the buyer.
+     * @param userId User id of the product.
+     * @param userGroupId User group id of the product.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling deleteAssignment.');
+        }
+        if (buyerID === null || buyerID === undefined) {
+            throw new Error('Required parameter buyerID was null or undefined when calling deleteAssignment.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (buyerID !== undefined && buyerID !== null) {
+            queryParameters = queryParameters.set('buyerID', <any>buyerID);
+        }
+		if (buyerID === null) {
+            throw new Error('Parameter buyerID was null when calling DeleteAssignment. Null values are not allowed');
+        }														
+        if (opts.userId !== undefined && opts.userId !== null) {
+            queryParameters = queryParameters.set('userId', <any>opts.userId);
+        }
+		if (opts.userId === null) {
+            throw new Error('Parameter userId was null when calling DeleteAssignment. Null values are not allowed');
+        }														
+        if (opts.userGroupId !== undefined && opts.userGroupId !== null) {
+            queryParameters = queryParameters.set('userGroupId', <any>opts.userGroupId);
+        }
+		if (opts.userGroupId === null) {
+            throw new Error('Parameter userGroupId was null when calling DeleteAssignment. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.delete<any>(`${this.basePath}products/${encodeURIComponent(String(productId))}/assignments/${encodeURIComponent(String(buyerId))}`,
+            {
+                params: queryParameters,
                 headers: headers,
                 observe: opts.observe,
                 reportProgress: opts.reportProgress
@@ -317,6 +397,133 @@ export class NetFxProductService {
     /**
      * 
      * 
+     * @param productId Product id of the product assignment.
+     * @param priceScheduleId Price schedule id of the product assignment.
+     * @param buyerId Buyer id of the product assignment.
+     * @param userId User id of the product assignment.
+     * @param userGroupId User group id of the product assignment.
+     * @param search Word or phrase to search for.
+     * @param searchOn Comma-delimited list of fields to search on.
+     * @param sortBy Comma-delimited list of fields to sort by.
+     * @param page Page of results to return. Default: 1
+     * @param pageSize Number of results to return per page. Default: 20, max: 100.
+     * @param filters Any additional key/value pairs passed in the query string are interpreted as filters. Valid keys are top-level properties of the returned model or &#39;xp.???&#39;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ListAssignment(options?: { productId?: string, priceScheduleId?: string, buyerId?: string, userId?: string, userGroupId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListProductAssignment>;
+    public ListAssignment(options?: { productId?: string, priceScheduleId?: string, buyerId?: string, userId?: string, userGroupId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListProductAssignment>>;
+    public ListAssignment(options?: { productId?: string, priceScheduleId?: string, buyerId?: string, userId?: string, userGroupId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListProductAssignment>>;
+    public ListAssignment(options?: { productId?: string, priceScheduleId?: string, buyerId?: string, userId?: string, userGroupId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (opts.productId !== undefined && opts.productId !== null) {
+            queryParameters = queryParameters.set('productId', <any>opts.productId);
+        }
+		if (opts.productId === null) {
+            throw new Error('Parameter productId was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.priceScheduleId !== undefined && opts.priceScheduleId !== null) {
+            queryParameters = queryParameters.set('priceScheduleId', <any>opts.priceScheduleId);
+        }
+		if (opts.priceScheduleId === null) {
+            throw new Error('Parameter priceScheduleId was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.buyerId !== undefined && opts.buyerId !== null) {
+            queryParameters = queryParameters.set('buyerId', <any>opts.buyerId);
+        }
+		if (opts.buyerId === null) {
+            throw new Error('Parameter buyerId was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.userId !== undefined && opts.userId !== null) {
+            queryParameters = queryParameters.set('userId', <any>opts.userId);
+        }
+		if (opts.userId === null) {
+            throw new Error('Parameter userId was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.userGroupId !== undefined && opts.userGroupId !== null) {
+            queryParameters = queryParameters.set('userGroupId', <any>opts.userGroupId);
+        }
+		if (opts.userGroupId === null) {
+            throw new Error('Parameter userGroupId was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.search !== undefined && opts.search !== null) {
+            queryParameters = queryParameters.set('search', <any>opts.search);
+        }
+		if (opts.search === null) {
+            throw new Error('Parameter search was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.searchOn !== undefined && opts.searchOn !== null) {
+            queryParameters = queryParameters.set('searchOn', <any>opts.searchOn);
+        }
+		if (opts.searchOn === null) {
+            throw new Error('Parameter searchOn was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.sortBy !== undefined && opts.sortBy !== null) {
+            queryParameters = queryParameters.set('sortBy', <any>opts.sortBy);
+        }
+		if (opts.sortBy === null) {
+            throw new Error('Parameter sortBy was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.page !== undefined && opts.page !== null) {
+            queryParameters = queryParameters.set('page', <any>opts.page);
+        }
+		if (opts.page === null) {
+            throw new Error('Parameter page was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.pageSize !== undefined && opts.pageSize !== null) {
+            queryParameters = queryParameters.set('pageSize', <any>opts.pageSize);
+        }
+		if (opts.pageSize === null) {
+            throw new Error('Parameter pageSize was null when calling ListAssignment. Null values are not allowed');
+        }														
+        if (opts.filters !== undefined && opts.filters !== null) {
+            queryParameters = this.configuration.unwrapFilters(opts.filters, queryParameters, 'ListAssignment');
+        }
+		if (opts.filters === null) {
+            throw new Error('Parameter filters was null when calling ListAssignment. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<ListProductAssignment>(`${this.basePath}products/assignments`,
+            {
+                params: queryParameters,
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
      * @param product 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -422,6 +629,62 @@ export class NetFxProductService {
 
         return this.httpClient.put<Product>(`${this.basePath}products/${encodeURIComponent(String(productId))}`,
             product,
+            {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productAssignment 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public PutAssignment(productAssignment: ProductAssignment, options?: { observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public PutAssignment(productAssignment: ProductAssignment, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public PutAssignment(productAssignment: ProductAssignment, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public PutAssignment(productAssignment: ProductAssignment, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (productAssignment === null || productAssignment === undefined) {
+            throw new Error('Required parameter productAssignment was null or undefined when calling putAssignment.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<any>(`${this.basePath}products/productassignments`,
+            productAssignment,
             {
                 headers: headers,
                 observe: opts.observe,
