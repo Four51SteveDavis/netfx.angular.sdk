@@ -204,6 +204,9 @@ export class NetFxProductService {
     /**
      * 
      * 
+     * @param catalogId Catalog id of the product.
+     * @param categoryId Category id of the product.
+     * @param supplierId Supplier id of the product.
      * @param search Word or phrase to search for.
      * @param searchOn Comma-delimited list of fields to search on.
      * @param sortBy Comma-delimited list of fields to sort by.
@@ -213,10 +216,10 @@ export class NetFxProductService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListProduct>;
-    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListProduct>>;
-    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListProduct>>;
-    public List(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+    public List(options?: { catalogId?: string, categoryId?: string, supplierId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListProduct>;
+    public List(options?: { catalogId?: string, categoryId?: string, supplierId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListProduct>>;
+    public List(options?: { catalogId?: string, categoryId?: string, supplierId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListProduct>>;
+    public List(options?: { catalogId?: string, categoryId?: string, supplierId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
             opts.observe = 'body';
@@ -226,6 +229,24 @@ export class NetFxProductService {
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (opts.catalogId !== undefined && opts.catalogId !== null) {
+            queryParameters = queryParameters.set('catalogId', <any>opts.catalogId);
+        }
+		if (opts.catalogId === null) {
+            throw new Error('Parameter catalogId was null when calling List. Null values are not allowed');
+        }														
+        if (opts.categoryId !== undefined && opts.categoryId !== null) {
+            queryParameters = queryParameters.set('categoryId', <any>opts.categoryId);
+        }
+		if (opts.categoryId === null) {
+            throw new Error('Parameter categoryId was null when calling List. Null values are not allowed');
+        }														
+        if (opts.supplierId !== undefined && opts.supplierId !== null) {
+            queryParameters = queryParameters.set('supplierId', <any>opts.supplierId);
+        }
+		if (opts.supplierId === null) {
+            throw new Error('Parameter supplierId was null when calling List. Null values are not allowed');
+        }														
         if (opts.search !== undefined && opts.search !== null) {
             queryParameters = queryParameters.set('search', <any>opts.search);
         }
