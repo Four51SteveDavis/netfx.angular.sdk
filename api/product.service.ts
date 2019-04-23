@@ -111,16 +111,16 @@ export class NetFxProductService {
      * 
      * 
      * @param productId Product id of the product.
-     * @param buyerID ID of the buyer.
+     * @param buyerId Buyer id of the product.
      * @param userId User id of the product.
      * @param userGroupId User group id of the product.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
-    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
-    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
-    public DeleteAssignment(productId: string, buyerID: string, options?: { buyerID?: string, userId?: string, userGroupId?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
+    public DeleteAssignment(productId: string, buyerId: string, options?: { userId?: string, userGroupId?: string, observe?: 'body', reportProgress?: boolean}): Observable<any>;
+    public DeleteAssignment(productId: string, buyerId: string, options?: { userId?: string, userGroupId?: string, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<any>>;
+    public DeleteAssignment(productId: string, buyerId: string, options?: { userId?: string, userGroupId?: string, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<any>>;
+    public DeleteAssignment(productId: string, buyerId: string, options?: { userId?: string, userGroupId?: string, observe?: any, reportProgress?: boolean}): Observable<any> {
 		const opts = options || {};
         if (opts.observe === null || opts.observe === undefined) {
             opts.observe = 'body';
@@ -131,17 +131,11 @@ export class NetFxProductService {
         if (productId === null || productId === undefined) {
             throw new Error('Required parameter productId was null or undefined when calling deleteAssignment.');
         }
-        if (buyerID === null || buyerID === undefined) {
-            throw new Error('Required parameter buyerID was null or undefined when calling deleteAssignment.');
+        if (buyerId === null || buyerId === undefined) {
+            throw new Error('Required parameter buyerId was null or undefined when calling deleteAssignment.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (buyerID !== undefined && buyerID !== null) {
-            queryParameters = queryParameters.set('buyerID', <any>buyerID);
-        }
-		if (buyerID === null) {
-            throw new Error('Parameter buyerID was null when calling DeleteAssignment. Null values are not allowed');
-        }														
         if (opts.userId !== undefined && opts.userId !== null) {
             queryParameters = queryParameters.set('userId', <any>opts.userId);
         }
