@@ -13,6 +13,10 @@ import { CustomHttpUrlEncodingCodec } from '../encoder';
 
 import { Observable } from 'rxjs';
 
+import { BuyerProduct } from '../model/buyerProduct';
+import { BuyerSpec } from '../model/buyerSpec';
+import { ListBuyerProduct } from '../model/listBuyerProduct';
+import { ListBuyerSpec } from '../model/listBuyerSpec';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
@@ -93,6 +97,314 @@ export class NetFxUserService {
 
         return this.httpClient.get<User>(`${this.basePath}user`,
             {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productId Product id of the product.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public GetProduct(productId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<BuyerProduct>;
+    public GetProduct(productId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<BuyerProduct>>;
+    public GetProduct(productId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<BuyerProduct>>;
+    public GetProduct(productId: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling getProduct.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<BuyerProduct>(`${this.basePath}user/products/${encodeURIComponent(String(productId))}`,
+            {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productId Product id of the spec.
+     * @param specId Spec id of the spec.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public GetSpec(productId: string, specId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<BuyerSpec>;
+    public GetSpec(productId: string, specId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<BuyerSpec>>;
+    public GetSpec(productId: string, specId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<BuyerSpec>>;
+    public GetSpec(productId: string, specId: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling getSpec.');
+        }
+        if (specId === null || specId === undefined) {
+            throw new Error('Required parameter specId was null or undefined when calling getSpec.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<BuyerSpec>(`${this.basePath}user/products/${encodeURIComponent(String(productId))}/specs/${encodeURIComponent(String(specId))}`,
+            {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param catalogId Catalog id of the product.
+     * @param categoryId Category id of the product.
+     * @param search Word or phrase to search for.
+     * @param searchOn Comma-delimited list of fields to search on.
+     * @param sortBy Comma-delimited list of fields to sort by.
+     * @param page Page of results to return. Default: 1
+     * @param pageSize Number of results to return per page. Default: 20, max: 100.
+     * @param filters Any additional key/value pairs passed in the query string are interpreted as filters. Valid keys are top-level properties of the returned model or &#39;xp.???&#39;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ListProducts(options?: { catalogId?: string, categoryId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListBuyerProduct>;
+    public ListProducts(options?: { catalogId?: string, categoryId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListBuyerProduct>>;
+    public ListProducts(options?: { catalogId?: string, categoryId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListBuyerProduct>>;
+    public ListProducts(options?: { catalogId?: string, categoryId?: string, search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (opts.catalogId !== undefined && opts.catalogId !== null) {
+            queryParameters = queryParameters.set('catalogId', <any>opts.catalogId);
+        }
+		if (opts.catalogId === null) {
+            throw new Error('Parameter catalogId was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.categoryId !== undefined && opts.categoryId !== null) {
+            queryParameters = queryParameters.set('categoryId', <any>opts.categoryId);
+        }
+		if (opts.categoryId === null) {
+            throw new Error('Parameter categoryId was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.search !== undefined && opts.search !== null) {
+            queryParameters = queryParameters.set('search', <any>opts.search);
+        }
+		if (opts.search === null) {
+            throw new Error('Parameter search was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.searchOn !== undefined && opts.searchOn !== null) {
+            queryParameters = queryParameters.set('searchOn', <any>opts.searchOn);
+        }
+		if (opts.searchOn === null) {
+            throw new Error('Parameter searchOn was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.sortBy !== undefined && opts.sortBy !== null) {
+            queryParameters = queryParameters.set('sortBy', <any>opts.sortBy);
+        }
+		if (opts.sortBy === null) {
+            throw new Error('Parameter sortBy was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.page !== undefined && opts.page !== null) {
+            queryParameters = queryParameters.set('page', <any>opts.page);
+        }
+		if (opts.page === null) {
+            throw new Error('Parameter page was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.pageSize !== undefined && opts.pageSize !== null) {
+            queryParameters = queryParameters.set('pageSize', <any>opts.pageSize);
+        }
+		if (opts.pageSize === null) {
+            throw new Error('Parameter pageSize was null when calling ListProducts. Null values are not allowed');
+        }														
+        if (opts.filters !== undefined && opts.filters !== null) {
+            queryParameters = this.configuration.unwrapFilters(opts.filters, queryParameters, 'ListProducts');
+        }
+		if (opts.filters === null) {
+            throw new Error('Parameter filters was null when calling ListProducts. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<ListBuyerProduct>(`${this.basePath}user/products`,
+            {
+                params: queryParameters,
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param productId Product id of the spec.
+     * @param search Word or phrase to search for.
+     * @param searchOn Comma-delimited list of fields to search on.
+     * @param sortBy Comma-delimited list of fields to sort by.
+     * @param page Page of results to return. Default: 1
+     * @param pageSize Number of results to return per page. Default: 20, max: 100.
+     * @param filters Any additional key/value pairs passed in the query string are interpreted as filters. Valid keys are top-level properties of the returned model or &#39;xp.???&#39;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ListSpecs(productId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListBuyerSpec>;
+    public ListSpecs(productId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListBuyerSpec>>;
+    public ListSpecs(productId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListBuyerSpec>>;
+    public ListSpecs(productId: string, options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (productId === null || productId === undefined) {
+            throw new Error('Required parameter productId was null or undefined when calling listSpecs.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (opts.search !== undefined && opts.search !== null) {
+            queryParameters = queryParameters.set('search', <any>opts.search);
+        }
+		if (opts.search === null) {
+            throw new Error('Parameter search was null when calling ListSpecs. Null values are not allowed');
+        }														
+        if (opts.searchOn !== undefined && opts.searchOn !== null) {
+            queryParameters = queryParameters.set('searchOn', <any>opts.searchOn);
+        }
+		if (opts.searchOn === null) {
+            throw new Error('Parameter searchOn was null when calling ListSpecs. Null values are not allowed');
+        }														
+        if (opts.sortBy !== undefined && opts.sortBy !== null) {
+            queryParameters = queryParameters.set('sortBy', <any>opts.sortBy);
+        }
+		if (opts.sortBy === null) {
+            throw new Error('Parameter sortBy was null when calling ListSpecs. Null values are not allowed');
+        }														
+        if (opts.page !== undefined && opts.page !== null) {
+            queryParameters = queryParameters.set('page', <any>opts.page);
+        }
+		if (opts.page === null) {
+            throw new Error('Parameter page was null when calling ListSpecs. Null values are not allowed');
+        }														
+        if (opts.pageSize !== undefined && opts.pageSize !== null) {
+            queryParameters = queryParameters.set('pageSize', <any>opts.pageSize);
+        }
+		if (opts.pageSize === null) {
+            throw new Error('Parameter pageSize was null when calling ListSpecs. Null values are not allowed');
+        }														
+        if (opts.filters !== undefined && opts.filters !== null) {
+            queryParameters = this.configuration.unwrapFilters(opts.filters, queryParameters, 'ListSpecs');
+        }
+		if (opts.filters === null) {
+            throw new Error('Parameter filters was null when calling ListSpecs. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<ListBuyerSpec>(`${this.basePath}user/products/${encodeURIComponent(String(productId))}/specs`,
+            {
+                params: queryParameters,
                 headers: headers,
                 observe: opts.observe,
                 reportProgress: opts.reportProgress

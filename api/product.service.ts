@@ -677,7 +677,7 @@ export class NetFxProductService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<any>(`${this.basePath}products/productassignments`,
+        return this.httpClient.put<any>(`${this.basePath}products/assignments`,
             productAssignment,
             {
                 headers: headers,

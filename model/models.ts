@@ -1,6 +1,8 @@
 export * from './activity';
 export * from './address';
 export * from './adminUser';
+export * from './buyerProduct';
+export * from './buyerSpec';
 export * from './cost';
 export * from './customer';
 export * from './dispatchedEquipment';
@@ -11,6 +13,8 @@ export * from './inventory';
 export * from './item';
 export * from './listAddress';
 export * from './listAdminUser';
+export * from './listBuyerProduct';
+export * from './listBuyerSpec';
 export * from './listCustomer';
 export * from './listFacet';
 export * from './listFacetValue';
