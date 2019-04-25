@@ -1,6 +1,6 @@
 {
   "name": "@netfx/angular2-typescript-netfx",
-  "version": "0.0.1-8p",
+  "version": "0.0.1-8q",
   "description": "angular 6.0.0+ typescript sdk for building on top of the netfx platform",
   "author": "netfx.io",
   "repository": {

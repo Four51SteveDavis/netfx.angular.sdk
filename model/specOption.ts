@@ -14,4 +14,6 @@ export interface SpecOption {
     IsOpenText?: boolean;
     PriceMarkupType?: string;
     PriceMarkup?: number;
+    Description?: string;
+    SpecId?: string;
 }
