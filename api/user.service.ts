@@ -17,6 +17,7 @@ import { BuyerProduct } from '../model/buyerProduct';
 import { BuyerSpec } from '../model/buyerSpec';
 import { ListBuyerProduct } from '../model/listBuyerProduct';
 import { ListBuyerSpec } from '../model/listBuyerSpec';
+import { ListOrder } from '../model/listOrder';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
@@ -203,6 +204,98 @@ export class NetFxUserService {
 
         return this.httpClient.get<BuyerSpec>(`${this.basePath}user/products/${encodeURIComponent(String(productId))}/specs/${encodeURIComponent(String(specId))}`,
             {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param search Word or phrase to search for.
+     * @param searchOn Comma-delimited list of fields to search on.
+     * @param sortBy Comma-delimited list of fields to sort by.
+     * @param page Page of results to return. Default: 1
+     * @param pageSize Number of results to return per page. Default: 20, max: 100.
+     * @param filters Any additional key/value pairs passed in the query string are interpreted as filters. Valid keys are top-level properties of the returned model or &#39;xp.???&#39;
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public ListOrders(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'body', reportProgress?: boolean}): Observable<ListOrder>;
+    public ListOrders(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<ListOrder>>;
+    public ListOrders(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<ListOrder>>;
+    public ListOrders(options?: { search?: string, searchOn?: string, sortBy?: string, page?: number, pageSize?: number, filters?: { [key: string]: string | Array<string>; }, observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (opts.search !== undefined && opts.search !== null) {
+            queryParameters = queryParameters.set('search', <any>opts.search);
+        }
+		if (opts.search === null) {
+            throw new Error('Parameter search was null when calling ListOrders. Null values are not allowed');
+        }														
+        if (opts.searchOn !== undefined && opts.searchOn !== null) {
+            queryParameters = queryParameters.set('searchOn', <any>opts.searchOn);
+        }
+		if (opts.searchOn === null) {
+            throw new Error('Parameter searchOn was null when calling ListOrders. Null values are not allowed');
+        }														
+        if (opts.sortBy !== undefined && opts.sortBy !== null) {
+            queryParameters = queryParameters.set('sortBy', <any>opts.sortBy);
+        }
+		if (opts.sortBy === null) {
+            throw new Error('Parameter sortBy was null when calling ListOrders. Null values are not allowed');
+        }														
+        if (opts.page !== undefined && opts.page !== null) {
+            queryParameters = queryParameters.set('page', <any>opts.page);
+        }
+		if (opts.page === null) {
+            throw new Error('Parameter page was null when calling ListOrders. Null values are not allowed');
+        }														
+        if (opts.pageSize !== undefined && opts.pageSize !== null) {
+            queryParameters = queryParameters.set('pageSize', <any>opts.pageSize);
+        }
+		if (opts.pageSize === null) {
+            throw new Error('Parameter pageSize was null when calling ListOrders. Null values are not allowed');
+        }														
+        if (opts.filters !== undefined && opts.filters !== null) {
+            queryParameters = this.configuration.unwrapFilters(opts.filters, queryParameters, 'ListOrders');
+        }
+		if (opts.filters === null) {
+            throw new Error('Parameter filters was null when calling ListOrders. Null values are not allowed');
+        }														
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.get<ListOrder>(`${this.basePath}user/orders`,
+            {
+                params: queryParameters,
                 headers: headers,
                 observe: opts.observe,
                 reportProgress: opts.reportProgress

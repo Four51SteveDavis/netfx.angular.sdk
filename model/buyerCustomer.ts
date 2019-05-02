@@ -5,10 +5,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Settings } from './settings';
 
 
-export interface StorefrontConfig {
-    Identity?: string;
-    SharedSecret?: string;
-    IncomingWebServicesId?: string;
+export interface BuyerCustomer {
+    ID?: string;
+    Name?: string;
+    DefaultCatalogID?: string;
+    Active?: boolean;
+    Settings?: Settings;
 }

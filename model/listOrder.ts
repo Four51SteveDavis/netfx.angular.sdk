@@ -5,10 +5,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Meta } from './meta';
+import { Order } from './order';
 
 
-export interface StorefrontConfig {
-    Identity?: string;
-    SharedSecret?: string;
-    IncomingWebServicesId?: string;
+export interface ListOrder {
+    Items?: Array<Order>;
+    Meta?: Meta;
 }

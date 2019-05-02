@@ -5,10 +5,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { LineItem } from './lineItem';
+import { Meta } from './meta';
 
 
-export interface StorefrontConfig {
-    Identity?: string;
-    SharedSecret?: string;
-    IncomingWebServicesId?: string;
+export interface ListLineItem {
+    Items?: Array<LineItem>;
+    Meta?: Meta;
 }

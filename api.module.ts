@@ -7,6 +7,8 @@ import { NetFxAdminUserService } from './api/adminUser.service';
 import { NetFxBillingAddressService } from './api/billingAddress.service';
 import { NetFxCustomerService } from './api/customer.service';
 import { NetFxCustomerUserService } from './api/customerUser.service';
+import { NetFxLineItemService } from './api/lineItem.service';
+import { NetFxOrderService } from './api/order.service';
 import { NetFxPriceScheduleService } from './api/priceSchedule.service';
 import { NetFxProductService } from './api/product.service';
 import { NetFxShipmentService } from './api/shipment.service';
@@ -32,6 +34,8 @@ import { NetFxUserService } from './api/user.service';
     NetFxBillingAddressService,
     NetFxCustomerService,
     NetFxCustomerUserService,
+    NetFxLineItemService,
+    NetFxOrderService,
     NetFxPriceScheduleService,
     NetFxProductService,
     NetFxShipmentService,

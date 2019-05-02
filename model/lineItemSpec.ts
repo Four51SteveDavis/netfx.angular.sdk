@@ -7,8 +7,9 @@
  */
 
 
-export interface StorefrontConfig {
-    Identity?: string;
-    SharedSecret?: string;
-    IncomingWebServicesId?: string;
+export interface LineItemSpec {
+    SpecID?: string;
+    Name?: string;
+    OptionID?: string;
+    Value?: string;
 }
