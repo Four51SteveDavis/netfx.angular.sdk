@@ -26,4 +26,5 @@ export interface BuyerProduct {
     Inventory?: Inventory;
     DefaultSupplierID?: string;
     SupplierId?: string;
+    Thumbnail?: string;
 }
