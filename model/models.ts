@@ -43,6 +43,7 @@ export * from './listSupplier';
 export * from './listSupplierOrder';
 export * from './listSupplierProduct';
 export * from './listSupplierSpec';
+export * from './listSupplierSpecOption';
 export * from './listUser';
 export * from './meta';
 export * from './metaWithFacets';
