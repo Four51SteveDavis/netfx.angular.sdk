@@ -22,6 +22,7 @@ import { NetFxSpecService } from './api/spec.service';
 import { NetFxSpecOptionService } from './api/specOption.service';
 import { NetFxSupplierService } from './api/supplier.service';
 import { NetFxSupplierAddressService } from './api/supplierAddress.service';
+import { NetFxSupplierOrderService } from './api/supplierOrder.service';
 import { NetFxSupplierProductService } from './api/supplierProduct.service';
 import { NetFxSupplierSpecService } from './api/supplierSpec.service';
 import { NetFxUserService } from './api/user.service';
@@ -50,6 +51,7 @@ import { NetFxUserService } from './api/user.service';
     NetFxSpecOptionService,
     NetFxSupplierService,
     NetFxSupplierAddressService,
+    NetFxSupplierOrderService,
     NetFxSupplierProductService,
     NetFxSupplierSpecService,
     NetFxUserService ]

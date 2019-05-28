@@ -288,4 +288,60 @@ export class NetFxOrderService {
         );
     }
 
+    /**
+     * 
+     * 
+     * @param direction Direction of the order. Possible values: Incoming, Outgoing.
+     * @param orderId Order id of the order.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public Submit(direction: string, orderId: string, options?: { observe?: 'body', reportProgress?: boolean}): Observable<Order>;
+    public Submit(direction: string, orderId: string, options?: { observe?: 'response', reportProgress?: boolean}): Observable<HttpResponse<Order>>;
+    public Submit(direction: string, orderId: string, options?: { observe?: 'events', reportProgress?: boolean}): Observable<HttpEvent<Order>>;
+    public Submit(direction: string, orderId: string, options?: { observe?: any, reportProgress?: boolean}): Observable<any> {
+		const opts = options || {};
+        if (opts.observe === null || opts.observe === undefined) {
+            opts.observe = 'body';
+        }
+        if (opts.reportProgress === null || opts.reportProgress === undefined) {
+            opts.reportProgress = false;
+        }
+        if (direction === null || direction === undefined) {
+            throw new Error('Required parameter direction was null or undefined when calling submit.');
+        }
+        if (orderId === null || orderId === undefined) {
+            throw new Error('Required parameter orderId was null or undefined when calling submit.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        headers = headers.set('Authorization', 'Bearer ' + this.tokenService.Get());
+
+        // to determine the Accept header
+        const httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/plain; charset=utf-8'
+        ];
+
+        return this.httpClient.post<Order>(`${this.basePath}orders/${encodeURIComponent(String(direction))}/${encodeURIComponent(String(orderId))}/submit`,
+            null,
+            {
+                headers: headers,
+                observe: opts.observe,
+                reportProgress: opts.reportProgress
+            }
+        );
+    }
+
 } 
