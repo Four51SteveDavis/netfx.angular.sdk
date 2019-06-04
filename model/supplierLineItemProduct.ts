@@ -17,4 +17,5 @@ export interface SupplierLineItemProduct {
     ShipWidth?: number;
     ShipLength?: number;
     SupplierId?: string;
+    NetFxId?: string;
 }
