@@ -20,5 +20,7 @@ export interface SupplierProduct {
     Active?: boolean;
     SpecCount?: number;
     DefaultSupplierID?: string;
+    SupplierId?: string;
     PriceSchedule?: SupplierPriceSchedule;
+    Images?: Array<string>;
 }

@@ -28,4 +28,5 @@ export interface BuyerProduct {
     SupplierId?: string;
     NetFxId?: string;
     Thumbnail?: string;
+    Images?: Array<string>;
 }

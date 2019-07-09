@@ -26,4 +26,5 @@ export interface Product {
     SupplierId?: string;
     NetFxId?: string;
     Thumbnail?: string;
+    Images?: Array<string>;
 }
