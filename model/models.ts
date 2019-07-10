@@ -9,6 +9,7 @@ export * from './customer';
 export * from './dispatchedEquipment';
 export * from './document';
 export * from './equipment';
+export * from './images';
 export * from './integrationLog';
 export * from './integrations';
 export * from './inventory';

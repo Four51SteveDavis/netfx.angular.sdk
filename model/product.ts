@@ -5,6 +5,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Images } from './images';
 import { Inventory } from './inventory';
 
 
@@ -26,5 +27,5 @@ export interface Product {
     SupplierId?: string;
     NetFxId?: string;
     Thumbnail?: string;
-    Images?: Array<string>;
+    Images?: Array<Images>;
 }
