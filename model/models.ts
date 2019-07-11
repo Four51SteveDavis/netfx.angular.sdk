@@ -9,6 +9,8 @@ export * from './customer';
 export * from './dispatchedEquipment';
 export * from './document';
 export * from './equipment';
+export * from './image';
+export * from './imageMetadata';
 export * from './imageRef';
 export * from './integrationLog';
 export * from './integrations';
