@@ -5,7 +5,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Images } from './images';
+import { ImageRef } from './imageRef';
 import { Inventory } from './inventory';
 import { PriceSchedule } from './priceSchedule';
 
@@ -28,6 +28,5 @@ export interface BuyerProduct {
     DefaultSupplierID?: string;
     SupplierId?: string;
     NetFxId?: string;
-    Thumbnail?: string;
-    Images?: Array<Images>;
+    Images?: Array<ImageRef>;
 }

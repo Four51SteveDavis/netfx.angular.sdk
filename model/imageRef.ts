@@ -7,7 +7,8 @@
  */
 
 
-export interface Images {
+export interface ImageRef {
     Id?: string;
     Url?: string;
+    Tags?: Array<string>;
 }
